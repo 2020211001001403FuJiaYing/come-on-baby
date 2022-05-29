@@ -24,7 +24,7 @@ public class User {
     }
 
     //setter and setter
-    public String getId(){
+    public int getId(){
         return id;
     }
 
@@ -82,5 +82,14 @@ public class User {
                 ", gender='" + gender + '\'' +
                 ", birthDate=" + birthDate +
                 '}';
+    }
+
+    public void setID(String id) {
+    }
+
+    public void setName(String username) {
+    }
+
+    public void setBirthdate(String birthdate) {
     }
 }
