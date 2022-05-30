@@ -65,6 +65,6 @@ public class CalServlet extends HttpServlet {
             response.addCookie(cNameCookie);
             response.addCookie(cLenCookie);
         }
-        response.sendRedirect(request.getContextPath()+"/Lab3/cal.jsp");
+        response.sendRedirect(request.getContextPath()+ "/webapp/WEB-INF/Lab3/cal.jsp");
     }
 }
