@@ -1,33 +1,37 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Lenovo
-  Date: 5/15/2021
-  Time: 11:32 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>validate</title>
 </head>
 <body>
-<%--Todo 1: Use <jsp:useBean> to create a Login bean instance in request scope --%>
 
-    <%--Todo 2: Use <jsp:setProperty> to set  beans' property username and password--%>
-<%
-   //todo 3: use if check username is admin and ppassword is admin
-%>
-    <%--todo 4: use jsp:forward to welcome.jsp page--%>
-
-    <%--todo 5: else part{ --%>
-
-<%
-// todo 6: print username or password error message
-
-%>
-    <%--todo 7: use jsp:include login.jsp page --%>
-
-    <%--todo 8: close else --%>
-
+<%--
+if(request.getParameter("username").equals("admin") && request.getParameter("password").equals("admin")){
+    String url="welcome.jsp?username="+request.getParameter("username");
+    response.sendRedirect(url);
+}else{
+    request.setAttribute("message","Username Password Error");
+    request.getRequestDispatcher("login.jsp").include(request,response);
+}
+--%>
+<%--todo 2: use c:choose ,c:when c:otherwise to validate username is 'admin' and  password is 'admin'--%>
+<c:choose>
+    <c:when test="${param.username == 'admin' && param.password == 'admin'}">
+        <%--todo 3: when username == admin use c:url and c:param to make url = "welcome.jsp?username=admin"--%>
+        <c:url var="url" value="welcome.jsp">
+            <c:param name="name" value="admin"></c:param>
+        </c:url>
+        <%-- todo 4.use c:redirect to url= welcome.jsp?username=admin--%>
+        <c:redirect url="${url}"></c:redirect>
+    </c:when>
+    <%-- todo 5. use c:otherwise --%>
+    <c:otherwise>
+        <%-- todo 6:use c:set to set a attribute name message="username password error" in request  --%>
+        <c:set var="message" value="username or password error!" scope="request" />
+        <%--todo 7:use c:import to include login.jsp --%>
+        <c:import url="login.jsp" />
+    </c:otherwise>
+</c:choose>
 </body>
 </html>
